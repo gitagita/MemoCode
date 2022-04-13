@@ -422,6 +422,27 @@ def listnumber():
         text.delete(SEL_FIRST, SEL_LAST)
 
 
+#코딩메뉴
+
+#한줄씩 문장을 읽어들여 '\n'문자로 연결하기
+def delEnter():
+    texts = str(text.get(1.0, END))
+    tList = texts.split('\n')
+    vText = ''
+    for t in tList:
+        if t == '':
+            break;
+        vText += t+'\\n'
+    text.delete(1.0, END)
+    text.insert(INSERT, vText)
+    
+#'\'문자 삭제
+def delWord():
+    texts = str(text.get(1.0, END))
+    texts = texts.replace('\\','\\\\')
+    text.delete(1.0, END)
+    text.insert(INSERT, texts)
+
 
 #도움말 메뉴
 
@@ -498,6 +519,14 @@ formmenu.add_command(label="들여쓰기", command=indent)
 formmenu.add_command(label="나열하기", command=listtext)
 formmenu.add_command(label="줄 번호", command=listnumber)
 menubar.add_cascade(label="서식", menu=formmenu)
+
+
+#코딩 메뉴 생성
+codemenu = Menu(menubar, tearoff=0)
+codemenu.add_command(label="엔터를 문자로 변환", command=delEnter)
+codemenu.add_separator()
+codemenu.add_command(label="원기호 문자 제거", command=delWord)
+menubar.add_cascade(label="코딩메뉴", menu=codemenu)
 
 
 #도움말 메뉴 생성
