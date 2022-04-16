@@ -457,7 +457,7 @@ def info():
     he = Toplevel(top)
     he.geometry("300x200")
     he.title("정보")
-    lb = Label(he, text = "MemoCode\n 버전: 1.0\n 개발언어: python\n개발자의 편의성에 초점을 맞춘 메모장입니다.\n\n개발자 이메일: 20190955@sungshin.ac.kr")
+    lb = Label(he, text = "MemoCode\n 버전: 1.1\n 개발언어: python\n개발자의 편의성에 초점을 맞춘 메모장입니다.\n\n개발자 이메일: 20190955@sungshin.ac.kr")
     lb.pack()
     
 
