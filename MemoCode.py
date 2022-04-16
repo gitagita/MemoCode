@@ -525,7 +525,7 @@ menubar.add_cascade(label="서식", menu=formmenu)
 codemenu = Menu(menubar, tearoff=0)
 codemenu.add_command(label="엔터를 문자로 변환", command=delEnter)
 codemenu.add_separator()
-codemenu.add_command(label="원기호 문자 제거", command=delWord)
+codemenu.add_command(label="원기호 문자 추가", command=delWord)
 menubar.add_cascade(label="코딩메뉴", menu=codemenu)
 
 
