@@ -436,7 +436,7 @@ def delEnter():
     text.delete(1.0, END)
     text.insert(INSERT, vText)
     
-#'\'문자 삭제
+#'\'를 '\\'로 변환
 def delWord():
     texts = str(text.get(1.0, END))
     texts = texts.replace('\\','\\\\')
