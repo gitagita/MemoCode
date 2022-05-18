@@ -1,7 +1,8 @@
 '''
 프로젝트 명: MemoCode
 설명: 메모장의 강점을 살리면서 개발자의 편의성에 초점을 맞춘 프로그램이다.
-버전: 1.0
+버전: 1.2
+추가기능: 코딩메뉴
 '''
 '''
 main 브랜치
@@ -430,19 +431,41 @@ def delEnter():
     tList = texts.split('\n')
     vText = ''
     for t in tList:
-        if t == '':
-            break;
         vText += t+'\\n'
     text.delete(1.0, END)
     text.insert(INSERT, vText)
     
-#'\'를 '\\'로 변환
+#따옴표를 쌍따옴표로 변환
+def quotestoDobule():
+    texts = str(text.get(1.0, END))
+    texts = texts.replace("'",'"')
+    text.delete(1.0, END)
+    text.insert(INSERT, texts)
+    
+#쌍따옴표를 따옴표로 변환
+def quotestoSingle():
+    texts = str(text.get(1.0, END))
+    texts = texts.replace('"',"'")
+    text.delete(1.0, END)
+    text.insert(INSERT, texts)
+    
+#한줄씩 문장을 읽어들여 '<br/>'문자로 연결하기
+def changeBR():
+    texts = str(text.get(1.0, END))
+    tList = texts.split('\n')
+    vText = ''
+    for t in tList:
+        vText += t+'<br/>'
+    text.delete(1.0, END)
+    text.insert(INSERT, vText)
+    
+#'\'문자 삭제
 def delWord():
     texts = str(text.get(1.0, END))
     texts = texts.replace('\\','\\\\')
     text.delete(1.0, END)
     text.insert(INSERT, texts)
-
+    
 
 #도움말 메뉴
 
@@ -457,7 +480,7 @@ def info():
     he = Toplevel(top)
     he.geometry("300x200")
     he.title("정보")
-    lb = Label(he, text = "MemoCode\n 버전: 1.1\n 개발언어: python\n개발자의 편의성에 초점을 맞춘 메모장입니다.\n\n개발자 이메일: 20190955@sungshin.ac.kr")
+    lb = Label(he, text = "MemoCode\n 버전: 1.0\n 개발언어: python\n개발자의 편의성에 초점을 맞춘 메모장입니다.\n\n개발자 이메일: 20190955@sungshin.ac.kr")
     lb.pack()
     
 
@@ -520,22 +543,22 @@ formmenu.add_command(label="나열하기", command=listtext)
 formmenu.add_command(label="줄 번호", command=listnumber)
 menubar.add_cascade(label="서식", menu=formmenu)
 
-
 #코딩 메뉴 생성
 codemenu = Menu(menubar, tearoff=0)
 codemenu.add_command(label="엔터를 문자로 변환", command=delEnter)
+codemenu.add_command(label="엔터를 br태그로 변환", command=changeBR)
+codemenu.add_command(label="따옴표를 쌍따옴표로 변환", command=quotestoDobule)
+codemenu.add_command(label="쌍따옴표를 따옴표로 변환", command=quotestoSingle)
 codemenu.add_separator()
-codemenu.add_command(label="원기호 문자 추가", command=delWord)
+codemenu.add_command(label="원기호 문자 제거", command=delWord)
 menubar.add_cascade(label="코딩메뉴", menu=codemenu)
-
 
 #도움말 메뉴 생성
 helpmenu = Menu(menubar, tearoff=0)
-helpmenu.add_command(label="의견보내기", command = message)
-helpmenu.add_command(label="MemoCode 정보", command = info)
+helpmenu.add_command(label="의견보내기", command=message)
+helpmenu.add_command(label="MemoCode 정보", command=info)
 menubar.add_cascade(label="도움말", menu=helpmenu)
 
 top.config(menu=menubar)
 
 top.mainloop()
-
